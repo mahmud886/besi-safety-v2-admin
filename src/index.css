@@ -1,0 +1,25 @@
+*,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+.btn.btn-md {
+    padding: 10px 25px !important;
+}
+.btn-main {
+    font-weight: 500;
+    background: linear-gradient(135deg, #13f1fc, #0470dc) !important;
+    color: #fff !important;
+    border: none;
+    border-radius: 5px !important;
+    transition: all 0.5s;
+}
+.btn-main:hover {
+    background: linear-gradient(135deg, #ed6ea0, #f7186a, #fbb03b) !important;
+    color: #000 !important;
+
+    border-radius: 5px !important;
+}
+
