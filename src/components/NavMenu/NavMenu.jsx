@@ -1,18 +1,21 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import './NavMenu.css';
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar, Nav} from 'react-bootstrap';
+import Logo from '../../logo.png';
 
 const NavMenu = () => {
     return (
         <div>
             <Container fluid className='main-color'>
                 <Navbar collapseOnSelect expand='lg'>
-                    <Navbar.Brand href='#home'>React</Navbar.Brand>
+                    <Navbar.Brand>
+                        <img src={Logo} alt="" className='img-fluid' width='50px' height='auto'/>
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls='responsive-navbar-nav' />
                     <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav className='m-auto'>
-                            <LinkContainer to=''>
+                            <LinkContainer to='/dashboard'>
                                 <Nav.Link>Dashboard</Nav.Link>
                             </LinkContainer>
 
@@ -37,7 +40,7 @@ const NavMenu = () => {
                             </LinkContainer>
                         </Nav>
                         <Nav>
-                            <LinkContainer to=' '>
+                            <LinkContainer to='/login'>
                                 <Nav.Link>Login</Nav.Link>
                             </LinkContainer>
                         </Nav>

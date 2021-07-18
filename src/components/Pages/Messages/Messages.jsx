@@ -46,6 +46,23 @@ const Messages = () => {
             })
     },[]);
 
+    const deleteMessage = (messageKey) =>{
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        fetch(`${apiEndpoint}/contactus/${messageKey}`,requestOptions)
+            .then((res) => res)
+            .then((message)=>{
+                alert('Message will be deleted..')
+
+                const newMessage = messages.filter(message => message.id !== messageKey);
+                setMessages(newMessage);
+
+            })
+    }
+
     return (
         <>
             <Container fluid>
@@ -56,7 +73,7 @@ const Messages = () => {
                     <div className="py-5">
                         <Table striped bordered hover size='md' className='text-center'>
                             <thead>
-                            <tr className='main-color'>
+                            <tr className='main-color text-light'>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -66,8 +83,12 @@ const Messages = () => {
                             </thead>
                             <tbody>
                             {
-                                messages.map((message)=>
-                                    <Message message={message} />
+                                messages.length === 0 ? 'No record to display':
+                                messages.map((message, key)=>
+                                    <Message message={message}
+                                            key={message.id}
+                                             deleteMessage={deleteMessage}
+                                    />
                                 )
                             }
                             </tbody>

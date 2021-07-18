@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from "react-bootstrap";
+
 
 import {useHistory } from 'react-router';
 
@@ -16,7 +16,7 @@ const EnrolledList = (props) => {
 
     return (
         <>
-            <tr>
+            <tr className=''>
                 <td>{applied_for}</td>
                 <td>{name}</td>
                 <td>{mobile}</td>
@@ -25,14 +25,17 @@ const EnrolledList = (props) => {
                 <td>{mobile_wallet_provider}</td>
                 <td>
 
-                        <Button className='btn btn-main btn-md ml-2'
+                        <button className='btn btn-outline-success btn-md ml-2'
 
                             onClick={() => singleEnrolledDetails(id)}>
-                            View</Button>
+                            DETAILS</button>
 
-                    {/*<LinkContainer to='/enrolled-details'>*/}
-                    {/*    <Button className='btn btn-main btn-sm ml-2'>Delete</Button>*/}
-                    {/*</LinkContainer>*/}
+
+                        <button className='btn btn-outline-danger btn-md ml-2'
+                            onClick={()=> props.deleteAdmission(id)}
+                        >
+                            DELETE</button>
+
 
                 </td>
             </tr>

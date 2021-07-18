@@ -55,13 +55,10 @@ import {apiEndpoint} from "../../../App";
 
 
 
-
-
-
-
 const Blogs = () => {
 
     const [blogs, setBlogs] = useState([]);
+
 
     useEffect(()=>{
         fetch(`${apiEndpoint}/blogposts`)
@@ -71,14 +68,42 @@ const Blogs = () => {
             });
     }, []);
 
+    const deleteBlog = (blogKey) =>{
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        fetch(`${apiEndpoint}/blogposts/${blogKey}`,requestOptions)
+            .then((res) => res)
+            .then((blog)=>{
+                alert('Blogs will be deleted...')
+
+                const newBlogs = blogs.filter(blog => blog.id !== blogKey);
+                setBlogs(newBlogs);
+
+            })
+    }
+
+
+
+
+
     const blogsCart =()=> {
-        return blogs.map((blog) => {
-            return (
-                <Col sm={12} xs={12} md={6} lg={2} xl={2}>
-                    <Blog blog={blog}/>
-                </Col>
-            )
-        });
+        return(
+            blogs.length === 0 ? 'No record to display':
+                blogs.map((blog, key) => {
+                return (
+                    <Col sm={12} xs={12} md={6} lg={3} xl={3}>
+                        <Blog blog={blog}
+                              key={blog.id}
+                              index={key}
+                              deleteBlog={deleteBlog}
+                        />
+                    </Col>
+                )
+            }))
+
     }
 
     return (
@@ -86,11 +111,11 @@ const Blogs = () => {
             <Container fluid>
                 <div className="pt-5">
                     <h2 className=' text-center p-3 rounded h1'>
-                        ALL MESSAGES FROM CONTACT PAGE
+                        ALL BLOGS
                     </h2>
                 </div>
                 <LinkContainer to='/create-blogs'>
-                    <div className="d-flex justify-content-end m-1">
+                    <div className="d-flex justify-content-end m-1 mb-3">
                         <Button className='btn btn-main btn-md'>Create a Blog</Button>
                     </div>
                 </LinkContainer>

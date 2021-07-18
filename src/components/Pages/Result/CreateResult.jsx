@@ -11,7 +11,7 @@ const CreateResult = () => {
         const student_name = event.target[0].value;
         const student_category = event.target[1].value;
         const student_id = event.target[2].value;
-        const student_certificate_no = event.target[2].value;
+        const student_certificate_no = event.target[3].value;
 
         const requestOptions = {
             method: 'POST',

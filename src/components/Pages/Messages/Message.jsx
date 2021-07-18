@@ -1,9 +1,9 @@
 import React from 'react';
-import {Button, Table} from "react-bootstrap";
+
 
 
 const Message = (props) => {
-    const {name, email, phone, message} = props.message;
+    const {name, email, phone, message,id} = props.message;
     return (
         <>
             <tr>
@@ -12,8 +12,11 @@ const Message = (props) => {
                 <td>{phone}</td>
                 <td>{message}</td>
                 <td>
-                    <Button className='btn btn-main btn-md ml-2'>View</Button>
-                    <Button className='btn btn-main btn-md ml-2'>Delete</Button>
+
+                    <button className='btn btn-outline-danger btn-sm'
+                            onClick={()=> props.deleteMessage(id)}
+                        >
+                        Delete</button>
                 </td>
             </tr>
         </>

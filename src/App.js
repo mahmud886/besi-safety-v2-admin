@@ -12,6 +12,8 @@ import BlogDetails from "./components/Pages/Blogs/BlogDetails";
 import CreateCourse from "./components/Pages/Enrolled/Courses/CreateCourse";
 import EnrolledDetails from "./components/Pages/Enrolled/EnrolledDetails";
 import CreateResult from "./components/Pages/Result/CreateResult";
+import Login from "./components/Login/Login";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 export let apiEndpoint = 'https://besi-bd.herokuapp.com/api/v1';
 
@@ -21,6 +23,9 @@ function App() {
             <Router>
                 <NavMenu />
                 <Switch>
+                    <Route path='/dashboard'>
+                        <Dashboard/>
+                    </Route>
                     <Route path='/enrolled'>
                         <Enrolled />
                     </Route>
@@ -56,6 +61,9 @@ function App() {
                         <CreateResult/>
                     </Route>
 
+                    <Route path=''>
+                        <Login/>
+                    </Route>
                 </Switch>
             </Router>
         </>

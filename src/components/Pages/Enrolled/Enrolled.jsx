@@ -8,8 +8,6 @@ const Enrolled = () => {
 
     const [admissions, setAdmissions] = useState([]);
 
-
-
     useEffect(() => {
         fetch(`${apiEndpoint}/coursebookings`)
             .then((res) => res.json())
@@ -17,6 +15,28 @@ const Enrolled = () => {
                 setAdmissions(admission);
             })
     },[]);
+
+    //Delete Admission
+
+    const deleteAdmission = (admissionKey) =>{
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        fetch(`${apiEndpoint}/coursebookings/${admissionKey}`,requestOptions)
+            .then((res) => res)
+            .then((admission)=>{
+
+                alert('Enrolled will be deleted..')
+
+                const newAdmissions = admissions.filter(admission => admission.id !== admissionKey);
+                setAdmissions(newAdmissions);
+
+            })
+
+    }
 
 
     return (
@@ -29,9 +49,9 @@ const Enrolled = () => {
 
                 </div>
                 <div className="">
-                    <Table striped bordered hover size='md' className='text-center'>
+                    <Table striped bordered hover size='md' className='text-center '>
                         <thead>
-                        <tr className='main-color'>
+                        <tr className='main-color text-light'>
                             <th>Applied For</th>
                             <th>Name</th>
                             <th>Phone</th>
@@ -43,8 +63,11 @@ const Enrolled = () => {
                         </thead>
                         <tbody>
                         {
-                            admissions.map((admission)=> (
-                                <EnrolledList admission={admission}/>
+                            admissions.length === 0 ? 'No record to display':
+                            admissions.map((admission, key)=> (
+                                <EnrolledList admission={admission} key={key}
+                                              deleteAdmission={deleteAdmission}
+                                />
                             ))
                         }
                         </tbody>

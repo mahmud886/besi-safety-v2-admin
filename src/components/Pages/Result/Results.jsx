@@ -18,9 +18,27 @@ const Results = () => {
     }, []);
 
 
+
+    // Delete Handler
+    const deleteResult = (resultKey) => {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        fetch(`${apiEndpoint}/courseresults/${resultKey}`,requestOptions)
+            .then((res) => res)
+             .then((result) => {
+                 alert('Are you ready to delete..??')
+                const newResult = results.filter(result => result.id !== resultKey);
+                setResults(newResult);
+        })
+    }
+
+
     return (
         <>
-            <Container>
+            <Container fluid>
                 <div className="py-3">
                     <h2 className=' text-center p-3 rounded h1'>
                         RESULT PAGE
@@ -35,22 +53,28 @@ const Results = () => {
 
                 <div className="border rounded">
                     <Card>
-                        <Card.Header className='main-color text-center'>ALL RESULT SHEET</Card.Header>
+                        <Card.Header className='main-color text-light text-center'>ALL RESULT SHEET</Card.Header>
                         <Card.Body>
-                            <Table striped bordered hover size="lg" className='text-center' >
+                            <Table striped bordered hover size="md" className='text-center' >
                                 <thead>
-                                <tr className='h5'>
+                                <tr className='h5 text-dark'>
                                     <th>NO</th>
                                     <th>STUDENT NAME</th>
                                     <th>COURSE CATEGORY</th>
                                     <th>STUDENT SERIAL NO</th>
                                     <th>STUDENT CERTIFICATE NO</th>
+                                    <th>ACTION</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {
-                                    results.map((result)=>(
-                                        <Result result ={result}/>
+                                    results.length === 0 ? 'No record to display':
+                                    results.map((result, key)=>(
+                                        <Result result ={result}
+                                                key={result.id}
+                                                index={key+1}
+                                                deleteResult={deleteResult}
+                                        />
                                     ))
                                 }
                                 </tbody>
