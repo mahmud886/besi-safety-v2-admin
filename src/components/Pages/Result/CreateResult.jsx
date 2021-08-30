@@ -10,8 +10,9 @@ const CreateResult = () => {
 
         const student_name = event.target[0].value;
         const student_category = event.target[1].value;
-        const student_id = event.target[2].value;
+        const student_serial_no = event.target[2].value;
         const student_certificate_no = event.target[3].value;
+        const is_passed = true;
 
         const requestOptions = {
             method: 'POST',
@@ -19,8 +20,9 @@ const CreateResult = () => {
             body: JSON.stringify({
                 student_name: student_name,
                 student_category: student_category,
-                student_id: student_id,
+                student_serial_no: student_serial_no,
                 student_certificate_no: student_certificate_no,
+                is_passed: is_passed,
             }),
         };
         fetch(`${apiEndpoint}/courseresults`, requestOptions)
@@ -65,6 +67,8 @@ const CreateResult = () => {
                             <Form.Label>Student Certificate Number</Form.Label>
                             <Form.Control type="text" placeholder="Enter Student Certificate Number" required/>
                         </Form.Group>
+
+
 
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Please Re-check" className='text-danger' required/>
